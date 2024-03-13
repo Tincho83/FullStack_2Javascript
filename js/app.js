@@ -419,7 +419,7 @@ function listarProductosparaComprar(num1, num2) {
 }
 
 function imprimirTicket() {
-  document.write("<header><h1>PruebaJS</h1><img src='../imgs/js.png' alt='Prueba JS'></header>");
+  document.write("<header><h1>PruebaJS</h1><img src='/imgs/js.png' alt='Prueba JS'></header>");
   document.write("<main><h1>Tienda de Productos Lacteos</h1><p></p>");
   document.write("<p></p>");
   document.write("<p>Cliente: " +nombreCli +" " +apellidoCli +"</p>");
