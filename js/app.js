@@ -668,7 +668,7 @@ function listarCarritoasc() {
     for (let o = 0; o < arrProductos.length; o++) {
       //console.log("i=" +i +" o=" +o); 
       if (tmp[i] == arrProductos[o]) {
-        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + arrMontoPagar[i] + " : " + arrProdprecios[o]);
+        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + " : " + arrProdprecios[o]);
         vartemp = vartemp + tmp[i] + ":   $" + arrProdprecios[o] + "\n";
       }
       else {
@@ -692,7 +692,7 @@ function listarCarritodesc() {
     for (let o = 0; o < arrProductos.length; o++) {
       //console.log("i=" +i +" o=" +o); 
       if (tmp[i] == arrProductos[o]) {
-        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + arrMontoPagar[i] + " : " + arrProdprecios[o]);
+        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + " : " + arrProdprecios[o]);
         vartemp = vartemp + tmp[i] + ":   $" + arrProdprecios[o] + "\n";
       }
       else {
