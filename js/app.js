@@ -25,7 +25,7 @@
 //metodos array (lenght, push,splice)
 //funciones
 //bucle: for, switch
-//condicional: if
+//condicional: if...else if...else.
 //
 //Cambios:
 // 12/03/2024: creacion doc HTML, CSS, JS
@@ -76,9 +76,11 @@ console.log("\n\n");
 let mensaje = "";
 let vartemp = "";
 let vartempd = 0.00;
+let varsaldotemp = 0;
 let realizarCompra = false;
 let nombreCli = "";
 let apellidoCli = "";
+let carritoCli = ""
 
 
 //Declaracion de array
@@ -86,6 +88,7 @@ const arrCarrito = [];
 const arrMontoPagar = [];
 const arrProductos = ["Leche Entera", "Leche Descremada", "Queso Cremoso", "Queso Port Salut", "Queso Rallado", "Crema de Leche", "Dulce de Leche", "Manteca", "Yogurt Entero", "Yogurt Light"];
 const arrProdprecios = [887.5, 892.0, 19570, 20900, 2000, 3850, 2500, 3000, 1100, 1260];
+const Cliente = ["Cliente3,Producto/s:Precio,Total,NroTicket"]
 
 
 //Declaracion de constantes
@@ -99,12 +102,16 @@ vartemp = typeof vartemp;
 console.log("* variable vartemp: " + vartemp + " [" + vartemp + "]");
 vartemp = typeof vartempd;
 console.log("* variable vartempd: " + vartempd + " [" + vartemp + "]");
+vartemp = typeof varsaldotemp;
+console.log("* variable varsaldotemp: " + varsaldotemp + " [" + varsaldotemp + "]");
 vartemp = typeof realizarCompra;
 console.log("* constante realizarCompra: " + realizarCompra + " [" + vartemp + "]");
 vartemp = typeof nombreCli;
 console.log("* variable nombreCli: " + nombreCli + " [" + vartemp + "]");
 vartemp = typeof apellidoCli;
 console.log("* constante apellidoCli: " + apellidoCli + " [" + vartemp + "]");
+vartemp = typeof carritoCli;
+console.log("* constante carritoCli: " + carritoCli + " [" + vartemp + "]");
 vartemp = typeof arrCarrito;
 console.log("* Array arrCarrito: " + arrCarrito + " tamaño: " + arrCarrito.length + " [" + vartemp + "]");
 vartemp = typeof arrMontoPagar;
@@ -113,6 +120,8 @@ vartemp = typeof arrProductos;
 console.log("* Array arrProductos: " + arrProductos + " tamaño: " + arrProductos.length + " [" + vartemp + "]");
 vartemp = typeof arrProdprecios;
 console.log("* Array arrProdprecios: " + arrProdprecios + " tamaño: " + arrProdprecios.length + " [" + vartemp + "]");
+vartemp = typeof Cliente;
+console.log("* Array arrProdprecios: " + Cliente + " tamaño: " + Cliente.length + " [" + vartemp + "]");
 console.log("**************************************\n\n");
 
 // *** Inicio de programa ***
@@ -129,83 +138,78 @@ console.log(mensaje);
 alert(mensaje);
 
 ingresarDatosdeCliente();
-
 realizarCompraProductos();
-
-
 imprimirTicket();
-
-
 
 // Funciones
 function ingresarDatosdeCliente() {
+  ingresarNombre();
+  ingresarApellido();
+}
 
+function ingresarNombre() {
   mensaje = "Ingresa tu Nombre:";
   console.log(mensaje);
   nombreCli = String(prompt(mensaje, "Escribe aqui tu Nombre"));
   console.log(nombreCli);
   vartemp = typeof nombreCli;
-  console.log("variable: nombreCli, Tipo: " + vartemp + ", tamaño: " + nombreCli.length);
+  console.log("*** variable: nombreCli, Tipo: " + vartemp + ", tamaño: " + nombreCli.length + " contenido: " + nombreCli + "\n");
 
   if ((nombreCli == null) || (nombreCli == "") || (nombreCli.length == 0)) {
     ingresarDatosdeCliente();
   }
   else {
     nombreCli = String.prototype.toUpperCase.call(nombreCli);
-
-    vartemp = typeof nombreCli;
-    console.log(mensaje + " " + nombreCli + " tamaño: " + nombreCli.length + " [" + vartemp + "]");
+    console.log("*** Actualizado: variable: nombreCli, Tipo: " + vartemp + ", tamaño: " + nombreCli.length + " contenido: " + nombreCli + "\n\n");
   }
+}
 
+function ingresarApellido() {
   mensaje = "Ingresa tu Apellido:";
   console.log(mensaje);
   apellidoCli = String(prompt(mensaje, "Escribe aqui tu Apellido"))
   console.log(apellidoCli);
   vartemp = typeof apellidoCli;
-  console.log("variable: apellidoCli, Tipo: " + vartemp + ", tamaño: " + apellidoCli.length);
+  console.log("*** variable: apellidoCli, Tipo: " + vartemp + ", tamaño: " + apellidoCli.length + " contenido: " + apellidoCli + "\n");
 
   if ((apellidoCli == null) || (apellidoCli == "") || (apellidoCli.length == 0)) {
-    apellidoCli == ""
+    ingresarApellido();
   }
   else {
     apellidoCli = String.prototype.toUpperCase.call(apellidoCli);
-
-    vartemp = typeof apellidoCli;
-    console.log(mensaje + " " + apellidoCli + " tamaño: " + apellidoCli.length + " [" + vartemp + "]");
+    console.log("*** Actualizado: variable: apellidoCli, Tipo: " + vartemp + ", tamaño: " + apellidoCli.length + " contenido: " + apellidoCli + "\n\n");
   }
   console.log("\n\n");
   comprobarDatosIngresados();
 }
 
-
-
 function comprobarDatosIngresados() {
-
   if ((nombreCli.length == 0) || (nombreCli == 'undefined') || (nombreCli == "") || (nombreCli == null) || (nombreCli == "NULL") || (nombreCli == "ESCRIBE AQUI TU NOMBRE")) {
+    mensaje = "Recuerda que debes ingresar un Nombre.\n\n";
+    console.log(mensaje);
+    alert(mensaje);
     ingresarDatosdeCliente();
   }
   else if ((apellidoCli.length == 0) || (apellidoCli == 'undefined') || (apellidoCli == "") || (apellidoCli == null) || (apellidoCli == "NULL") || (apellidoCli == "ESCRIBE AQUI TU APELLIDO")) {
+    mensaje = "Recuerda que debes ingresar un Apellido.\n\n";
+    console.log(mensaje);
+    alert(mensaje);
     ingresarDatosdeCliente();
   }
   else {
-    mensaje = "Bienvenido/a " + nombreCli + " " + apellidoCli;
+    mensaje = "Bienvenido/a " + nombreCli + " " + apellidoCli + ".\n\n";
     console.log(mensaje);
     alert(mensaje);
-    console.log("\n\n");
   }
-
 }
 
-
-
 function realizarCompraProductos() {
-  mensaje = "Deseas Realizar una compra?";
+  mensaje = "Deseas comprar un producto?";
   console.log(mensaje);
   realizarCompra = confirm(mensaje);
+  let tmn = realizarCompra.length;
   vartemp = typeof realizarCompra;
-  console.log("* constante realizarCompra: " + realizarCompra + " [" + vartemp + "]");
-  console.log("\n\n");
-
+  console.log("*** variable: realizarCompra, Tipo: " + vartemp + ", tamaño: " + tmn + " contenido: " + realizarCompra + "\n\n");
 
   if (realizarCompra == true) {
     do {
@@ -218,9 +222,9 @@ function realizarCompraProductos() {
       mensaje = "Tu carrito esta vacio. Deseas comprar algun producto?";
       console.log(mensaje);
       realizarCompra = confirm(mensaje);
+      let tmn = realizarCompra.length;
       vartemp = typeof realizarCompra;
-      console.log("* constante realizarCompra: " + realizarCompra + " [" + vartemp + "]");
-      console.log("\n\n");
+      console.log("*** variable: realizarCompra, Tipo: " + vartemp + ", tamaño: " + tmn + " contenido: " + realizarCompra + "\n\n");
 
       if (realizarCompra == true) {
         do {
@@ -229,7 +233,7 @@ function realizarCompraProductos() {
         while (realizarCompra == true)
       }
       else {
-        mensaje = "Te vamos a mostrar los productos y sus precios.";
+        mensaje = "Te vamos a mostrar los productos y sus precios. Te esperamos pronto!";
         console.log(mensaje);
         alert(mensaje);
         listarProductos();
@@ -239,51 +243,107 @@ function realizarCompraProductos() {
 
     }
   }
-
-
 }
 
+function listarProductos() {
+  vartemp = "";
+  for (let i = 0; i < arrProductos.length; i++) {
+    let temp = String.prototype.toUpperCase.call(arrProductos[i]);
+    vartemp = vartemp + temp + ":   $" + arrProdprecios[i] + "\n";
+  }
 
-
-
-
-
-
-
+  mensaje = "Estos son nuestros productos para compra Online:\n" + vartemp + "\n\nAcontinuacion podras imprimir el catalogo si lo deseas.\n";
+  console.log(mensaje);
+  alert(mensaje);
+}
 
 function agregarProductosCarrito() {
-  let carritoCli = "";
+  carritoCli = "";
   vartemp = "";
+  vartempd = 0;
 
   for (let i = 0; i < arrProductos.length; i++) {
-    vartemp = vartemp + i + ". " + arrProductos[i] + ":   $" + arrProdprecios[i] + "\n";
+    vartempd = i + 1;
+    vartemp = vartemp + vartempd + ". " + arrProductos[i] + ":   $" + arrProdprecios[i] + "\n";
   }
 
-  console.log("Estos son nuestros productos para compra Online:\n\nIngrese el numero de la izquierda del producto que deseas comprar?\n\n" + vartemp);
-  carritoCli = String(prompt("Estos son nuestros productos para compra Online:\n\nIngrese el numero de la izquierda del producto que deseas comprar?\n\n" + vartemp))
+  mensaje = "Estos son nuestros productos para compra Online:\n\nIngrese el nro de Id o Nombre Completo del Producto para comprarlo.\nO escriba el nombre parcial para buscarlo\n !Respete las Mayusculas y Minusculas.\n\n" + vartemp;
+  console.log(mensaje);
+  carritoCli = String(prompt(mensaje));
 
-  if ((carritoCli == "") || (parseInt(carritoCli) < arrProductos.length)) {
-    vartemp = typeof carritoCli;
-    console.log("* variable carritoCli: " + carritoCli + " [" + vartemp + "]");
+  if ((carritoCli.length == 0) || (carritoCli == 'undefined') || (carritoCli == "") || (carritoCli == null) || (carritoCli == "NULL") || (carritoCli == "null")) {
+    //if ((carritoCli == "")) {
 
-
-    mensaje = "Codigo de producto ingresado: " + carritoCli + "\n\nSe agrego a tu carrito el producto: " + arrProductos[carritoCli] + ", Precio: $" + arrProdprecios[carritoCli];
+    console.log("*** variable carritoCli vacia: " + carritoCli);
+    mensaje = "Debes ingresar un Id o nombre de Producto de la lista!";
     console.log(mensaje);
     alert(mensaje);
-
-    arrCarrito.push(arrProductos[carritoCli]);
-    arrMontoPagar.push(arrProdprecios[carritoCli]);
-
-    vartempd = 0.00;
-    for (let i = 0; i < arrCarrito.length; i++) {
-      vartempd = vartempd + parseFloat(arrMontoPagar[i]);
-      //console.log("Sumas a tu carrito + $" + arrMontoPagar[i] + " ***");
-    }
+    carritoCli = "";
+    let tmn = carritoCli.length;
+    let temp = typeof carritoCli;
+    console.log("*** variable: carritoCli esta vacia, Tipo: " + temp + ", tamaño: " + tmn + " contenido: " + carritoCli + "\n\n");
+  }
+  else if ((parseInt(carritoCli) > arrProductos.length)) {
+    //varsaldotemp = 0.00;
+    console.log("*** variable carritoCli: " + carritoCli);
+    mensaje = "Debes ingresar un Id o nombre de Producto de la lista!";
+    console.log(mensaje);
+    alert(mensaje);
+    carritoCli = "";
   }
   else {
-    vartemp = typeof carritoCli;
-    console.log("* variable carritoCli: " + carritoCli + " [" + vartemp + "]");
-    mensaje = "Debes ingresar un numero de la lista!";
+    tipoCaracteres(carritoCli);
+    //esCaracterEspecial(carritoCli);
+    //esNumerico(carritoCli);
+    //esAlfabeto(carritoCli);
+    guardarProductoCarrito();
+  }
+
+
+
+
+
+  //   if ((carritoCli == "") || (parseInt(carritoCli) < arrProductos.length)) {
+  if ((parseInt(carritoCli) <= arrProductos.length)) {
+    console.log("dato almacenado en 'carritoCli' es nro y es menor o igual que el tamaño de 'arrProductos'.");
+  }
+  else if ((parseInt(carritoCli) > arrProductos.length)) {
+    console.log("dato almacenado en 'carritoCli' es nro y es mayor que el tamaño de 'arrProductos'.");
+  }
+  else {
+
+  }
+
+
+
+  if ((parseInt(carritoCli) < arrProductos.length + 1)) {
+    //console.log("* variable carritoCli: " + carritoCli);
+
+
+    //mensaje = "Codigo de producto ingresado: " + carritoCli + "\n\nSe agrego a tu carrito el producto: " + arrProductos[carritoCli] + ", Precio: $" + arrProdprecios[carritoCli];
+    //console.log(mensaje);
+    //alert(mensaje);
+
+    //arrCarrito.push(arrProductos[carritoCli]);
+    //arrMontoPagar.push(arrProdprecios[carritoCli]);
+
+    //vartempd = 0.00;
+    //for (let i = 0; i < arrCarrito.length; i++) {
+    //  vartempd = vartempd + parseFloat(arrMontoPagar[i]);
+    //comentario console.log("Sumas a tu carrito + $" + arrMontoPagar[i] + " ***");
+    //  }
+  }
+  else if (carritoCli == "") {
+    //   console.log("*** variable carritoCli vacia: " + carritoCli);
+    //   mensaje = "Debes ingresar un Id o nombre de Producto de la lista!";
+    //   console.log(mensaje);
+    //   alert(mensaje);
+    //   carritoCli = "";
+  }
+  else {
+    //varsaldotemp = 0.00;
+    console.log("* variable carritoCli: " + carritoCli);
+    mensaje = "Debes ingresar un Id o nombre de Producto de la lista!";
     console.log(mensaje);
     alert(mensaje);
     carritoCli = "";
@@ -292,19 +352,20 @@ function agregarProductosCarrito() {
 
 
 
-  mensaje = "Tienes en tu carrito " + arrCarrito.length + " producto/s.\n\nTotal: $" + vartempd;
-  console.log(mensaje);
-  alert(mensaje);
+  mensaje = "Tienes en tu carrito " + arrCarrito.length + " producto/s.\n\nTotal a pagar: $ " + varsaldotemp + "\n\nDeseas seguir comprando otro producto?";
+  //console.log(mensaje);
+  //alert(mensaje);
 
-  mensaje = "Deseas seguir comprando otro producto?";
+  //mensaje = "Deseas seguir comprando otro producto?";
+
   console.log(mensaje);
   realizarCompra = confirm(mensaje);
   vartemp = typeof realizarCompra;
-  console.log("* constante realizarCompra: " + realizarCompra + " >tipo> " + vartemp);
+  console.log("*** variable realizarCompra: Tipo: " + vartemp + " contenido: " + realizarCompra + "\n\n");
   if (realizarCompra == false) {
     menucarrito();
   }
-  else { 
+  else {
     mensaje = "Opciones de Compra de productos";
     console.log(mensaje);
     //alert(mensaje);
@@ -313,6 +374,181 @@ function agregarProductosCarrito() {
 
 }
 
+function obtenerEnteroRandom(int) {
+  return Math.floor(Math.random() * int);
+}
+
+function guardarProductoCarrito() {
+  if (vartemp == "nro") {
+    console.log("*** Variable 'carritoCli' tiene almacenado numero: " + carritoCli);
+    let temp = carritoCli - 1;
+    mensaje = "Id de Producto ingresado: " + carritoCli + "\n\nSe agrego a tu carrito el producto: " + arrProductos[temp] + ", Precio: $" + arrProdprecios[temp];
+    console.log(mensaje);
+    alert(mensaje);
+
+    arrCarrito.push(arrProductos[temp]);
+    arrMontoPagar.push(arrProdprecios[temp]);
+
+    varsaldotemp = 0.00;
+    for (let i = 0; i < arrCarrito.length; i++) {
+      varsaldotemp = varsaldotemp + parseFloat(arrMontoPagar[i]);
+      //console.log("Sumas a tu carrito + $" + arrMontoPagar[i] + " ***");
+    }
+  }
+  else if (vartemp == "txt") {
+    console.log("*** Variable 'carritoCli' tiene almacenado texto: " + carritoCli);
+    mensaje = "Nombre de Producto ingresado: " + carritoCli + "\n\nSe procedera a buscar todos los productos con ese nombre. ";
+    console.log(mensaje);
+    alert(mensaje);
+
+    buscarProducto(carritoCli);
+  }
+  else {
+
+  }
+}
+
+
+function tipoCaracteres(str) {
+  let tmn = carritoCli.length;
+  vartemp = typeof carritoCli;
+
+  const result = [...str]
+    .every(char => (char >= '0' && char <= '9'));
+
+  if (result == true) {
+    console.log("*** Variable carritoCli con numeros: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + tmn + "}, tipo:{" + vartemp + "}");
+    vartemp = "nro"
+    return result;
+  }
+  else {
+    const result = [...str]
+      .every(char => (char >= ' ' && char <= '/') && (char >= ':' && char <= '@') && (char >= '[' && char <= '_') && (char >= '{' && char <= '¡'));
+
+    if (result == true) {
+      console.log("* Variable carritoCli con simbolos: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + tmn + "}, tipo:{" + vartemp + "}");
+      return result;
+    }
+    else {
+      const result = [...str]
+        .every(char => (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z'));
+      console.log("*** Variable carritoCli con letras: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + tmn + "}, tipo:{" + vartemp + "}");
+      vartemp = "txt"
+      return result;
+    }
+
+
+  }
+
+
+}
+
+
+function buscarProducto(str) {
+  let indexbusqueda = arrProductos.indexOf(str);
+  console.log(indexbusqueda);
+
+  if (indexbusqueda == -1) {
+    console.log("No se encontro el nombre '" + str + ", procederemos a buscar nombre/s relacionados. Valor: " + indexbusqueda);
+    //arrProductos.filter(word=> word.includes(str));
+    const busqProd = arrProductos.filter((word) => word.includes(str));
+    console.log(busqProd);
+
+    vartemp = "";
+    vartempd = 0;
+    for (let i = 0; i < busqProd.length; i++) {
+      indexbusqueda = arrProductos.indexOf(busqProd[i]);
+      console.log("Se encontro: '" + busqProd[i] + "' en el indice: '" + indexbusqueda + "' del array arrProductos.");
+      vartempd = indexbusqueda + 1;
+      vartemp = vartemp + vartempd + ". " + arrProductos[indexbusqueda] + ":   $" + arrProdprecios[indexbusqueda] + "\n";
+    }
+
+    if (busqProd.length > 0) {
+      mensaje = "Estos son los productos que encontramos con el texto: " + str + ".\n\nIngrese el nro del 'Id del Producto' (Izquierda).\nO escriba el nombre completo del producto a comprar.\n\n" + vartemp;
+      console.log(mensaje);
+      carritoCli = String(prompt(mensaje));
+      tipoCaracteres(carritoCli);
+      guardarProductoCarrito();
+    }
+    else {
+      mensaje = "No se encontro el nombre '" + str +"'";
+      console.log(mensaje);
+      alert(mensaje);
+    }
+
+
+  }
+  else {
+    console.log("Se encontro el nombre del producto '" + str + "' con el id: '" + indexbusqueda + "'");
+    carritoCli = indexbusqueda.toString();
+
+    console.log("*** Variable 'carritoCli' tiene almacenado numero: " + carritoCli);
+    let temp = indexbusqueda + 1;
+    mensaje = "Nombre de Producto: " + str + " con el Id de Producto: " + temp + "\n\nSe agrego a tu carrito: " + arrProductos[indexbusqueda] + ", Precio: $" + arrProdprecios[indexbusqueda];
+    console.log(mensaje);
+    alert(mensaje);
+
+    arrCarrito.push(arrProductos[indexbusqueda]);
+    arrMontoPagar.push(arrProdprecios[indexbusqueda]);
+
+    varsaldotemp = 0.00;
+    for (let i = 0; i < arrCarrito.length; i++) {
+      varsaldotemp = varsaldotemp + parseFloat(arrMontoPagar[i]);
+      //console.log("Sumas a tu carrito + $" + arrMontoPagar[i] + " ***");
+    }
+  }
+}
+
+
+function esNumerico(str) {
+  let tmn = carritoCli.lenght;
+  const result = [...str]
+    .every(char => (char >= '0' && char <= '9'));
+  vartemp = typeof carritoCli;
+  console.log("* Variable carritoCli con numeros: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + tmn + "}, tipo:{" + vartemp + "}");
+  return result;
+}
+
+function esAlfabeto(str) {
+  const result = [...str]
+    .every(char => (char >= 'a' && char <= 'z')
+      || (char >= 'A' && char <= 'Z'));
+  vartemp = typeof carritoCli;
+  console.log("* Variable carritoCli con letras: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + carritoCli.lenght + "}, tipo:{" + vartemp + "}");
+  return result;
+}
+
+function esCaracterEspecial(str) {
+  const result = [...str]
+    .every(char => (char >= ' ' && char <= '/')
+      && (char >= ':' && char <= '@') && (char >= '[' && char <= '_') && (char >= '{' && char <= '¡'));
+  vartemp = typeof carritoCli;
+  console.log("* Variable carritoCli con simbolos: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + carritoCli.lenght + "}, tipo:{" + vartemp + "}");
+  return result;
+}
+
+function eseAlfabeto(str) {
+  let tmn = carritoCli.length;
+  console.log("carritoCli: " + carritoCli + " tamaño: " + tmn);
+
+  if (tmn == 0) {
+    console.log("carritoCli esta vacio." + "carritoCli: " + carritoCli + " tamaño" + tmn);
+  }
+  else if (tmn > 1) {
+    console.log("carritoCli tiene el valor: " + carritoCli);
+  }
+  else {
+    const result = [...str]
+      .every(char => (char >= 'a' && char <= 'z')
+        || (char >= 'A' && char <= 'Z'));
+    console.log(result);
+    vartemp = typeof carritoCli;
+    console.log("* variable carritoCli: " + carritoCli + " tamaño" + carritoCli.lenght + " [" + vartemp + "]");
+    return result;
+  }
+}
+
+
 function menucarrito() {
   let menucarropc = "";
   mensaje = "Deseas acceder al menu del carrito?";
@@ -320,10 +556,16 @@ function menucarrito() {
   let menucarr = confirm(mensaje);
   vartemp = typeof menucarr;
   console.log("* constante menucarr: " + menucarr + " >tipo> " + vartemp);
-  if (menucarr == false) {
-  mensaje = "Imprimiremos la factura.";
-  console.log(mensaje);
-  alert(mensaje);
+
+  if ((menucarr == false) && (carritoCli == false)) {
+    alert("Como no has comprado ningun producto se te mostrara los precios.");
+    listarProductos();
+    
+  }
+  else if (menucarr == false) {
+    mensaje = "Imprimiremos la factura.";
+    console.log(mensaje);
+    alert(mensaje);
   }
   else {
     mensaje = "*** Menu de Carrito:\n\n1. (A)gregar producto al carrito\n\n2. (B)orrar producto del carrito\n\n3. (M)ostrar productos del carrito\n\n4. (I)mprimir Ticket";
@@ -376,11 +618,11 @@ function borrarProdCarr() {
   carritoCli = Number(prompt(mensaje));
   vartemp = typeof carritoCli;
   console.log("* constante carritoCli: " + carritoCli + " >tipo> " + vartemp);
-  console.log(" Prod" +arrCarrito.length +" Prec" +arrMontoPagar.length);
-  console.log("Borrando item del indice: " +carritoCli +" " +arrCarrito[carritoCli] +arrMontoPagar[carritoCli] );
+  console.log(" Prod" + arrCarrito.length + " Prec" + arrMontoPagar.length);
+  console.log("Borrando item del indice: " + carritoCli + " " + arrCarrito[carritoCli] + arrMontoPagar[carritoCli]);
   arrCarrito.splice(carritoCli, 1);
   arrMontoPagar.splice(carritoCli, 1);
-  console.log(" Prod" +arrCarrito.length +" Prec" +arrMontoPagar.length);
+  console.log(" Prod" + arrCarrito.length + " Prec" + arrMontoPagar.length);
   menucarrito();
 
 }
@@ -396,19 +638,6 @@ function listarCarrito() {
   menucarrito();
 }
 
-function listarProductos() {
-
-  vartemp = "";
-  for (let i = 0; i < arrProductos.length; i++) {
-    vartemp = vartemp + arrProductos[i] + ":   $" + arrProdprecios[i] + "\n";
-  }
-
-  mensaje = "Estos son nuestros productos para compra Online:\n" + vartemp;
-  console.log(mensaje);
-  alert(mensaje);
-}
-
-
 function listarProductosparaComprar(num1, num2) {
   resultado = num1 + num2;
 
@@ -419,24 +648,36 @@ function listarProductosparaComprar(num1, num2) {
 }
 
 function imprimirTicket() {
+  let ticketCliente = "";
+  let prodtemp = "";
+  let ticketGestion = obtenerEnteroRandom(9999999);
+
   document.write("<header><h1>PruebaJS</h1><img src='./imgs/js.png' alt='Prueba JS'></header>");
   document.write("<main><h1>Tienda de Productos Lacteos</h1><p></p>");
   document.write("<p></p>");
-  document.write("<p>Cliente: " +nombreCli +" " +apellidoCli +"</p>");
+  document.write("<p>Cliente: " + nombreCli + " " + apellidoCli + "</p>");
+  ticketCliente = nombreCli + " " + apellidoCli + ",";
   if (arrCarrito.length > 0) {
-    vartempd = 0.00
+    varsaldotemp = 0.00
     document.write("<table border='2'><tr><td>Producto</td><td>Precio</td></tr>");
 
     for (let i = 0; i < arrCarrito.length; i++) {
-      document.write("<tr><td>" + arrCarrito[i] + "</td><td>" + arrMontoPagar[i] + "</td></tr>");
-      vartempd = vartempd + arrMontoPagar[i];
+      let temp = String.prototype.toUpperCase.call(arrCarrito[i]);
+      document.write("<tr><td>" + temp + "</td><td>" + arrMontoPagar[i] + "</td></tr>");
+      varsaldotemp = varsaldotemp + arrMontoPagar[i];
+      prodtemp = prodtemp + temp + ":" + arrMontoPagar[i] + "/";
     }
+
+    ticketCliente = ticketCliente + prodtemp + "," + varsaldotemp + "," + "Tipo C 0003-" + ticketGestion;
+
+    document.write("<p>Ticket: Tipo C 0003-" + ticketGestion + "</p>");
     document.write("<tr><td>&nbsp;</td><td>&nbsp;</td>");
-    document.write("<tr><td>*Total</td><td>" + vartempd + "</td>");
+    document.write("<tr><td>*Total</td><td>" + varsaldotemp + "</td>");
     document.write("</table></main>");
 
     document.write("<footer><p>Los precios unitarios y totales incluyen IVA.</p></footer>");
     document.write("<h2 border='2'>Gracias por tu compra!</h2><p>Te esperamos nuevamente, Que tengas un buen dia!</p>");
+    console.log("Ticket:" + ticketCliente);
   }
   else {
     document.write("<p>Listado de Precios</p>");
@@ -444,14 +685,15 @@ function imprimirTicket() {
     document.write("<table border='2'><tr><td>Producto</td><td>Precio</td></tr>");
 
     for (let i = 0; i < arrProductos.length; i++) {
-      document.write("<tr><td>" + arrProductos[i] + "</td><td>" + arrProdprecios[i] + "</td></tr>");
+      let temp = String.prototype.toUpperCase.call(arrProductos[i]);
+      document.write("<tr><td>" + temp + "</td><td>" + arrProdprecios[i] + "</td></tr>");
     }
 
     document.write("</table></main>");
 
     document.write("<footer><p>Los precios unitarios y totales incluyen IVA.</p><p>Te esperamos nuevamente. Que tengas un buen dia!</p></footer>");
+    console.log("Catalogo de precios para:" + nombreCli + " " + apellidoCli );
   }
-
 
 }
 
