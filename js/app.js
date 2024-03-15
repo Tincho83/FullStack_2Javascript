@@ -660,15 +660,17 @@ function listarProductosparaComprar(num1, num2) {
 
 function listarCarritoasc() {
   vartemp = "";
-  let tmp = arrCarrito.sort();
+  const arrtmp = arrCarrito.map((x) => x);
+  let tmp = arrtmp.sort();
   console.log(arrProductos);
+  console.log(arrCarrito);
   console.log(tmp);
 
   for (let i = 0; i < arrCarrito.length; i++) {
     for (let o = 0; o < arrProductos.length; o++) {
       //console.log("i=" +i +" o=" +o); 
       if (tmp[i] == arrProductos[o]) {
-        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + " : " + arrProdprecios[o]);
+        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio: " + arrProdprecios[o]);
         vartemp = vartemp + tmp[i] + ":   $" + arrProdprecios[o] + "\n";
       }
       else {
@@ -684,15 +686,17 @@ function listarCarritoasc() {
 
 function listarCarritodesc() {
   vartemp = "";
-  let tmp = arrCarrito.reverse();
+  const arrtmp = arrCarrito.map((x) => x);
+  let tmp = arrtmp.reverse();
   console.log(arrProductos);
+  console.log(arrCarrito);
   console.log(tmp);
 
   for (let i = 0; i < arrCarrito.length; i++) {
     for (let o = 0; o < arrProductos.length; o++) {
       //console.log("i=" +i +" o=" +o); 
       if (tmp[i] == arrProductos[o]) {
-        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + " : " + arrProdprecios[o]);
+        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio: " + arrProdprecios[o]);
         vartemp = vartemp + tmp[i] + ":   $" + arrProdprecios[o] + "\n";
       }
       else {
