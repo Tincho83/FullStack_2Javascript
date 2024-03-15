@@ -38,9 +38,8 @@
 // 14/03/2024: habilitacion de registros log para verificar entradas, tipos de datos, cambios, opciones.
 //
 //
-//https://tincho83.github.io/FullStack_1DesarrolloWeb/
-//https://tincho83.github.io/FullStack_1DesarrolloWeb/        dev
-//https://github.com/Tincho83/FullStack_1DesarrolloWeb
+//https://tincho83.github.io/FullStack_2Javascript/       main
+//https://github.com/Tincho83/FullStack_2Javascript
 //https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
 //*********************************************************
 //
@@ -471,7 +470,7 @@ function buscarProducto(str) {
       guardarProductoCarrito();
     }
     else {
-      mensaje = "No se encontro el nombre '" + str +"'";
+      mensaje = "No se encontro el nombre '" + str + "'";
       console.log(mensaje);
       alert(mensaje);
     }
@@ -560,7 +559,7 @@ function menucarrito() {
   if ((menucarr == false) && (carritoCli == false)) {
     alert("Como no has comprado ningun producto se te mostrara los precios.");
     listarProductos();
-    
+
   }
   else if (menucarr == false) {
     mensaje = "Imprimiremos la factura.";
@@ -568,7 +567,7 @@ function menucarrito() {
     alert(mensaje);
   }
   else {
-    mensaje = "*** Menu de Carrito:\n\n1. (A)gregar producto al carrito\n\n2. (B)orrar producto del carrito\n\n3. (M)ostrar productos del carrito\n\n4. (I)mprimir Ticket";
+    mensaje = "*** Menu de Carrito:\n\n1. (A)gregar producto al carrito\n2. (B)orrar producto del carrito\n3. (M)ostrar productos del carrito\n3a. Mostrar productos del carrito en orden a(s)cendente\n3b. Mostrar productos del carrito en orden de(s)cendente\n4. (I)mprimir Ticket";
     console.log(mensaje);
     menucarropc = prompt(mensaje);
     vartemp = typeof menucarropc;
@@ -592,6 +591,18 @@ function menucarrito() {
       case "3":
         console.log("mostrar");
         listarCarrito();
+        break;
+      case "s":
+      case "S":
+      case "3a":
+        console.log("mostrar asc");
+        listarCarritoasc();
+        break;
+      case "d":
+      case "D":
+      case "3b":
+        console.log("mostrar desc");
+        listarCarritodesc();
         break;
       case "i":
       case "I":
@@ -647,6 +658,54 @@ function listarProductosparaComprar(num1, num2) {
   return resultado;
 }
 
+function listarCarritoasc() {
+  vartemp = "";
+  let tmp = arrCarrito.sort();
+  console.log(arrProductos);
+  console.log(tmp);
+
+  for (let i = 0; i < arrCarrito.length; i++) {
+    for (let o = 0; o < arrProductos.length; o++) {
+      //console.log("i=" +i +" o=" +o); 
+      if (tmp[i] == arrProductos[o]) {
+        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + arrMontoPagar[i] + " : " + arrProdprecios[o]);
+        vartemp = vartemp + tmp[i] + ":   $" + arrProdprecios[o] + "\n";
+      }
+      else {
+
+      }
+    }
+  }
+  mensaje = "Tu Carrito:\n\n" + vartemp;
+  console.log(mensaje);
+  alert(mensaje);
+  menucarrito();
+}
+
+function listarCarritodesc() {
+  vartemp = "";
+  let tmp = arrCarrito.reverse();
+  console.log(arrProductos);
+  console.log(tmp);
+
+  for (let i = 0; i < arrCarrito.length; i++) {
+    for (let o = 0; o < arrProductos.length; o++) {
+      //console.log("i=" +i +" o=" +o); 
+      if (tmp[i] == arrProductos[o]) {
+        console.log("i=" + i + " o=" + o + " Prodct. " + tmp[i] + " : " + arrProductos[o] + " Precio. " + arrMontoPagar[i] + " : " + arrProdprecios[o]);
+        vartemp = vartemp + tmp[i] + ":   $" + arrProdprecios[o] + "\n";
+      }
+      else {
+
+      }
+    }
+  }
+  mensaje = "Tu Carrito:\n\n" + vartemp;
+  console.log(mensaje);
+  alert(mensaje);
+  menucarrito();
+}
+
 function imprimirTicket() {
   let ticketCliente = "";
   let prodtemp = "";
@@ -692,7 +751,7 @@ function imprimirTicket() {
     document.write("</table></main>");
 
     document.write("<footer><p>Los precios unitarios y totales incluyen IVA.</p><p>Te esperamos nuevamente. Que tengas un buen dia!</p></footer>");
-    console.log("Catalogo de precios para:" + nombreCli + " " + apellidoCli );
+    console.log("Catalogo de precios para:" + nombreCli + " " + apellidoCli);
   }
 
 }
