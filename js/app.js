@@ -93,7 +93,7 @@ const Cliente = ["Cliente3,Producto/s:Precio,Total,NroTicket"]
 //Declaracion de constantes
 //
 
-
+// Para verificar los tipos de variables creadas
 console.log("******* Comprobando variables: *******\n");
 vartemp = typeof mensaje;
 console.log("* variable mensaje: " + mensaje + " [" + vartemp + "]");
@@ -123,29 +123,33 @@ vartemp = typeof Cliente;
 console.log("* Array arrProdprecios: " + Cliente + " tamaño: " + Cliente.length + " [" + vartemp + "]");
 console.log("**************************************\n\n");
 
+
 // *** Inicio de programa ***
-
-
 console.log("********************************")
 console.log("*      Inicio de Interaccion   *")
 console.log("********************************")
 console.log("\n\n");
 
 
+// Mensaje Bienvenida
 mensaje = "Hola Cliente!. Te voy a solicitar obligatoriamente tu Nombre y Apellido.";
 console.log(mensaje);
 alert(mensaje);
 
+// Funciones para el funcionamiento del programa, estas funciones pueden llamar a otras creadas mas adelante.
 ingresarDatosdeCliente();
 realizarCompraProductos();
 imprimirTicket();
 
 // Funciones
+
+// Para el ingreso del Nombre y Apellido
 function ingresarDatosdeCliente() {
   ingresarNombre();
   ingresarApellido();
 }
 
+// Para el ingreso individual del nombre, contiene condicional para no continuar si el valor es inapropiado/blanco/nulo
 function ingresarNombre() {
   mensaje = "Ingresa tu Nombre:";
   console.log(mensaje);
@@ -154,8 +158,8 @@ function ingresarNombre() {
   vartemp = typeof nombreCli;
   console.log("*** variable: nombreCli, Tipo: " + vartemp + ", tamaño: " + nombreCli.length + " contenido: " + nombreCli + "\n");
 
-  if ((nombreCli == null) || (nombreCli == "") || (nombreCli.length == 0)) {
-    ingresarDatosdeCliente();
+  if ((nombreCli.length == 0) || (nombreCli == 'undefined') || (nombreCli == "") || (nombreCli == null) || (nombreCli == "NULL") || (nombreCli == "ESCRIBE AQUI TU NOMBRE")) {
+    ingresarNombre();
   }
   else {
     nombreCli = String.prototype.toUpperCase.call(nombreCli);
@@ -163,6 +167,7 @@ function ingresarNombre() {
   }
 }
 
+// Para el ingreso individual del apellido, contiene condicional para no continuar si el valor es inapropiado/blanco/nulo
 function ingresarApellido() {
   mensaje = "Ingresa tu Apellido:";
   console.log(mensaje);
@@ -171,7 +176,7 @@ function ingresarApellido() {
   vartemp = typeof apellidoCli;
   console.log("*** variable: apellidoCli, Tipo: " + vartemp + ", tamaño: " + apellidoCli.length + " contenido: " + apellidoCli + "\n");
 
-  if ((apellidoCli == null) || (apellidoCli == "") || (apellidoCli.length == 0)) {
+  if ((apellidoCli.length == 0) || (apellidoCli == 'undefined') || (apellidoCli == "") || (apellidoCli == null) || (apellidoCli == "NULL") || (apellidoCli == "ESCRIBE AQUI TU APELLIDO")) {
     ingresarApellido();
   }
   else {
@@ -182,6 +187,7 @@ function ingresarApellido() {
   comprobarDatosIngresados();
 }
 
+//Para validar y dar la bievenida
 function comprobarDatosIngresados() {
   if ((nombreCli.length == 0) || (nombreCli == 'undefined') || (nombreCli == "") || (nombreCli == null) || (nombreCli == "NULL") || (nombreCli == "ESCRIBE AQUI TU NOMBRE")) {
     mensaje = "Recuerda que debes ingresar un Nombre.\n\n";
@@ -193,7 +199,7 @@ function comprobarDatosIngresados() {
     mensaje = "Recuerda que debes ingresar un Apellido.\n\n";
     console.log(mensaje);
     alert(mensaje);
-    ingresarDatosdeCliente();
+    ingresarApellido();
   }
   else {
     mensaje = "Bienvenido/a " + nombreCli + " " + apellidoCli + ".\n\n";
@@ -202,6 +208,7 @@ function comprobarDatosIngresados() {
   }
 }
 
+// funcion para ofrecer comprar
 function realizarCompraProductos() {
   mensaje = "Deseas comprar un producto?";
   console.log(mensaje);
@@ -212,6 +219,7 @@ function realizarCompraProductos() {
 
   if (realizarCompra == true) {
     do {
+      // funcion para comprar
       agregarProductosCarrito();
     }
     while (realizarCompra == true)
@@ -227,6 +235,7 @@ function realizarCompraProductos() {
 
       if (realizarCompra == true) {
         do {
+          // funcion para comprar
           agregarProductosCarrito();
         }
         while (realizarCompra == true)
@@ -244,6 +253,7 @@ function realizarCompraProductos() {
   }
 }
 
+// lista los productos
 function listarProductos() {
   vartemp = "";
   for (let i = 0; i < arrProductos.length; i++) {
@@ -256,6 +266,7 @@ function listarProductos() {
   alert(mensaje);
 }
 
+// agrega producto al carrito
 function agregarProductosCarrito() {
   carritoCli = "";
   vartemp = "";
@@ -291,18 +302,14 @@ function agregarProductosCarrito() {
     carritoCli = "";
   }
   else {
+    //verificacion de caracteres ingresados cuando se compra
     tipoCaracteres(carritoCli);
-    //esCaracterEspecial(carritoCli);
-    //esNumerico(carritoCli);
-    //esAlfabeto(carritoCli);
+    
+    //guarda producto en carrito
     guardarProductoCarrito();
   }
 
-
-
-
-
-  //   if ((carritoCli == "") || (parseInt(carritoCli) < arrProductos.length)) {
+  // Comprobaciones de varible carritoCli
   if ((parseInt(carritoCli) <= arrProductos.length)) {
     console.log("dato almacenado en 'carritoCli' es nro y es menor o igual que el tamaño de 'arrProductos'.");
   }
@@ -313,48 +320,23 @@ function agregarProductosCarrito() {
 
   }
 
-
-
   if ((parseInt(carritoCli) < arrProductos.length + 1)) {
-    //console.log("* variable carritoCli: " + carritoCli);
-
-
-    //mensaje = "Codigo de producto ingresado: " + carritoCli + "\n\nSe agrego a tu carrito el producto: " + arrProductos[carritoCli] + ", Precio: $" + arrProdprecios[carritoCli];
-    //console.log(mensaje);
-    //alert(mensaje);
-
-    //arrCarrito.push(arrProductos[carritoCli]);
-    //arrMontoPagar.push(arrProdprecios[carritoCli]);
-
-    //vartempd = 0.00;
-    //for (let i = 0; i < arrCarrito.length; i++) {
-    //  vartempd = vartempd + parseFloat(arrMontoPagar[i]);
-    //comentario console.log("Sumas a tu carrito + $" + arrMontoPagar[i] + " ***");
-    //  }
   }
   else if (carritoCli == "") {
-    //   console.log("*** variable carritoCli vacia: " + carritoCli);
-    //   mensaje = "Debes ingresar un Id o nombre de Producto de la lista!";
-    //   console.log(mensaje);
-    //   alert(mensaje);
-    //   carritoCli = "";
   }
   else {
-    //varsaldotemp = 0.00;
     console.log("* variable carritoCli: " + carritoCli);
     mensaje = "Debes ingresar un Id o nombre de Producto de la lista!";
     console.log(mensaje);
     alert(mensaje);
     carritoCli = "";
-
   }
 
 
-
+// mensaje que se le indica cuantos producots tiene en el carrito y monto total a pagar.
   mensaje = "Tienes en tu carrito " + arrCarrito.length + " producto/s.\n\nTotal a pagar: $ " + varsaldotemp + "\n\nDeseas seguir comprando otro producto?";
   //console.log(mensaje);
   //alert(mensaje);
-
   //mensaje = "Deseas seguir comprando otro producto?";
 
   console.log(mensaje);
@@ -373,10 +355,12 @@ function agregarProductosCarrito() {
 
 }
 
+// usado de manera provisoria oara obtener un nro aleatorio para el nro de factura
 function obtenerEnteroRandom(int) {
   return Math.floor(Math.random() * int);
 }
 
+// guarda producto en carrito
 function guardarProductoCarrito() {
   if (vartemp == "nro") {
     console.log("*** Variable 'carritoCli' tiene almacenado numero: " + carritoCli);
@@ -407,7 +391,7 @@ function guardarProductoCarrito() {
   }
 }
 
-
+// verificacion de caracteres ingresados en campo de compra
 function tipoCaracteres(str) {
   let tmn = carritoCli.length;
   vartemp = typeof carritoCli;
@@ -442,7 +426,7 @@ function tipoCaracteres(str) {
 
 }
 
-
+// buscar un producto cuando se agrega letras y no nro.
 function buscarProducto(str) {
   let indexbusqueda = arrProductos.indexOf(str);
   console.log(indexbusqueda);
@@ -499,55 +483,7 @@ function buscarProducto(str) {
 }
 
 
-function esNumerico(str) {
-  let tmn = carritoCli.lenght;
-  const result = [...str]
-    .every(char => (char >= '0' && char <= '9'));
-  vartemp = typeof carritoCli;
-  console.log("* Variable carritoCli con numeros: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + tmn + "}, tipo:{" + vartemp + "}");
-  return result;
-}
-
-function esAlfabeto(str) {
-  const result = [...str]
-    .every(char => (char >= 'a' && char <= 'z')
-      || (char >= 'A' && char <= 'Z'));
-  vartemp = typeof carritoCli;
-  console.log("* Variable carritoCli con letras: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + carritoCli.lenght + "}, tipo:{" + vartemp + "}");
-  return result;
-}
-
-function esCaracterEspecial(str) {
-  const result = [...str]
-    .every(char => (char >= ' ' && char <= '/')
-      && (char >= ':' && char <= '@') && (char >= '[' && char <= '_') && (char >= '{' && char <= '¡'));
-  vartemp = typeof carritoCli;
-  console.log("* Variable carritoCli con simbolos: {" + result + "}, contenido:{" + carritoCli + "}, tamaño:{" + carritoCli.lenght + "}, tipo:{" + vartemp + "}");
-  return result;
-}
-
-function eseAlfabeto(str) {
-  let tmn = carritoCli.length;
-  console.log("carritoCli: " + carritoCli + " tamaño: " + tmn);
-
-  if (tmn == 0) {
-    console.log("carritoCli esta vacio." + "carritoCli: " + carritoCli + " tamaño" + tmn);
-  }
-  else if (tmn > 1) {
-    console.log("carritoCli tiene el valor: " + carritoCli);
-  }
-  else {
-    const result = [...str]
-      .every(char => (char >= 'a' && char <= 'z')
-        || (char >= 'A' && char <= 'Z'));
-    console.log(result);
-    vartemp = typeof carritoCli;
-    console.log("* variable carritoCli: " + carritoCli + " tamaño" + carritoCli.lenght + " [" + vartemp + "]");
-    return result;
-  }
-}
-
-
+// Mopciones del menu carrito
 function menucarrito() {
   let menucarropc = "";
   mensaje = "Deseas acceder al menu del carrito?";
@@ -567,7 +503,7 @@ function menucarrito() {
     alert(mensaje);
   }
   else {
-    mensaje = "*** Menu de Carrito:\n\n1. (A)gregar producto al carrito\n2. (B)orrar producto del carrito\n3. (M)ostrar productos del carrito\n3a. Mostrar productos del carrito en orden a(s)cendente\n3b. Mostrar productos del carrito en orden de(s)cendente\n4. (I)mprimir Ticket";
+    mensaje = "*** Menu de Carrito:\n\n1. (A)gregar producto al carrito\n2. (B)orrar producto del carrito\n3. (M)ostrar productos del carrito\n3a. Mostrar productos del carrito en orden a(s)cendente\n3b. Mostrar productos del carrito en orden (d)escendente\n4. (I)mprimir Ticket";
     console.log(mensaje);
     menucarropc = prompt(mensaje);
     vartemp = typeof menucarropc;
@@ -619,6 +555,7 @@ function menucarrito() {
 
 }
 
+//Borrar producto del carrito
 function borrarProdCarr() {
   vartemp = "";
   for (let i = 0; i < arrCarrito.length; i++) {
@@ -638,6 +575,7 @@ function borrarProdCarr() {
 
 }
 
+// listar productos del carrito
 function listarCarrito() {
   vartemp = "";
   for (let i = 0; i < arrCarrito.length; i++) {
@@ -649,15 +587,7 @@ function listarCarrito() {
   menucarrito();
 }
 
-function listarProductosparaComprar(num1, num2) {
-  resultado = num1 + num2;
-
-  mensajeConsola = "Suma: " + resultado;
-  depuracionConsola(mensajeConsola)
-
-  return resultado;
-}
-
+// listar productos de carrito ascendente
 function listarCarritoasc() {
   vartemp = "";
   const arrtmp = arrCarrito.map((x) => x);
@@ -684,10 +614,13 @@ function listarCarritoasc() {
   menucarrito();
 }
 
+
+// listar productos del carrito descendente
 function listarCarritodesc() {
   vartemp = "";
   const arrtmp = arrCarrito.map((x) => x);
-  let tmp = arrtmp.reverse();
+  let tmp = arrtmp.sort();
+  tmp = tmp.reverse();
   console.log(arrProductos);
   console.log(arrCarrito);
   console.log(tmp);
@@ -710,6 +643,7 @@ function listarCarritodesc() {
   menucarrito();
 }
 
+// simulacion de impresion de ticket en pantalla
 function imprimirTicket() {
   let ticketCliente = "";
   let prodtemp = "";
