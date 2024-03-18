@@ -91,6 +91,7 @@ const Cliente = ["Cliente3,Producto/s:Precio,Total,NroTicket"]
 
 
 //Declaracion de constantes
+const msjBienvenida ="";
 //
 
 // Para verificar los tipos de variables creadas
