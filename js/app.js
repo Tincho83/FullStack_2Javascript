@@ -91,7 +91,7 @@ const Cliente = ["Cliente3,Producto/s:Precio,Total,NroTicket"]
 
 
 //Declaracion de constantes
-const msjBienvenida ="";
+const msjBienvenida = "";
 //
 
 // Para verificar los tipos de variables creadas
@@ -305,7 +305,7 @@ function agregarProductosCarrito() {
   else {
     //verificacion de caracteres ingresados cuando se compra
     tipoCaracteres(carritoCli);
-    
+
     //guarda producto en carrito
     guardarProductoCarrito();
   }
@@ -334,7 +334,7 @@ function agregarProductosCarrito() {
   }
 
 
-// mensaje que se le indica cuantos producots tiene en el carrito y monto total a pagar.
+  // mensaje que se le indica cuantos producots tiene en el carrito y monto total a pagar.
   mensaje = "Tienes en tu carrito " + arrCarrito.length + " producto/s.\n\nTotal a pagar: $ " + varsaldotemp + "\n\nDeseas seguir comprando otro producto?";
   //console.log(mensaje);
   //alert(mensaje);
@@ -504,6 +504,12 @@ function menucarrito() {
     alert(mensaje);
   }
   else {
+    let carritosession = JSON.stringify(arrCarrito);
+    let carritopssession = JSON.stringify(arrMontoPagar);
+    localStorage.setItem("carrito", carritosession);
+    localStorage.setItem("pagar", carritopssession);
+    console.log("Contenido JSON" + carritosession);
+    console.log("Contenido JSON" + carritopssession);
     mensaje = "*** Menu de Carrito:\n\n1. (A)gregar producto al carrito\n2. (B)orrar producto del carrito\n3. (M)ostrar productos del carrito\n3a. Mostrar productos del carrito en orden a(s)cendente\n3b. Mostrar productos del carrito en orden (d)escendente\n4. (I)mprimir Ticket";
     console.log(mensaje);
     menucarropc = prompt(mensaje);
@@ -649,47 +655,80 @@ function imprimirTicket() {
   let ticketCliente = "";
   let prodtemp = "";
   let ticketGestion = obtenerEnteroRandom(9999999);
+  let hdrhtml = "";
+  let maihtml = "";
+  let ftrhtml = "";
 
-  document.write("<header><h1>PruebaJS</h1><img src='./imgs/js.png' alt='Prueba JS'></header>");
-  document.write("<main><h1>Tienda de Productos Lacteos</h1><p></p>");
-  document.write("<p></p>");
-  document.write("<p>Cliente: " + nombreCli + " " + apellidoCli + "</p>");
+  hdrhtml = "<h1>PruebaJS</h1> <img src='./imgs/js.png' alt='Prueba JS'> <p></p> <h2>Tienda de Productos Lacteos</h2><p></p> <p></p> <p>Cliente: " + nombreCli + " " + apellidoCli + "</p>"
   ticketCliente = nombreCli + " " + apellidoCli + ",";
+
+
+  //document.write("<header><h1>PruebaJS</h1><img src='./imgs/js.png' alt='Prueba JS'></header>");
+  //document.write("<main><h1>Tienda de Productos Lacteos</h1><p></p>");
+  //document.write("<p></p>");
+  //document.write("<p>Cliente: " + nombreCli + " " + apellidoCli + "</p>");
+
+
   if (arrCarrito.length > 0) {
     varsaldotemp = 0.00
-    document.write("<table border='2'><tr><td>Producto</td><td>Precio</td></tr>");
+
+    maihtml = "<table border='2'><tr><td>Producto</td><td>Precio</td></tr>";
+    //document.write("<table border='2'><tr><td>Producto</td><td>Precio</td></tr>");
 
     for (let i = 0; i < arrCarrito.length; i++) {
       let temp = String.prototype.toUpperCase.call(arrCarrito[i]);
-      document.write("<tr><td>" + temp + "</td><td>" + arrMontoPagar[i] + "</td></tr>");
+      maihtml = maihtml + "<tr><td>" + temp + "</td><td>" + arrMontoPagar[i] + "</td></tr>";
+
+      //document.write("<tr><td>" + temp + "</td><td>" + arrMontoPagar[i] + "</td></tr>");
       varsaldotemp = varsaldotemp + arrMontoPagar[i];
       prodtemp = prodtemp + temp + ":" + arrMontoPagar[i] + "/";
     }
 
     ticketCliente = ticketCliente + prodtemp + "," + varsaldotemp + "," + "Tipo C 0003-" + ticketGestion;
 
-    document.write("<p>Ticket: Tipo C 0003-" + ticketGestion + "</p>");
-    document.write("<tr><td>&nbsp;</td><td>&nbsp;</td>");
-    document.write("<tr><td>*Total</td><td>" + varsaldotemp + "</td>");
-    document.write("</table></main>");
+    hdrhtml = hdrhtml + "<p>Ticket: Tipo C 0003-" + ticketGestion + "</p>";
 
-    document.write("<footer><p>Los precios unitarios y totales incluyen IVA.</p></footer>");
-    document.write("<h2 border='2'>Gracias por tu compra!</h2><p>Te esperamos nuevamente, Que tengas un buen dia!</p>");
+    document.getElementById('hdr').innerHTML = hdrhtml;
+
+    maihtml = maihtml + "<tr><td>&nbsp;</td><td>&nbsp;</td>" +"<tr><td>*Total</td><td>" + varsaldotemp + "</td>" +"</table>"
+    
+    
+    document.getElementById('man').innerHTML = maihtml;
+
+    //document.write("<p>Ticket: Tipo C 0003-" + ticketGestion + "</p>");
+    //document.write("<tr><td>&nbsp;</td><td>&nbsp;</td>");
+    //document.write("<tr><td>*Total</td><td>" + varsaldotemp + "</td>");
+    //document.write("</table></main>");
+
+    ftrhtml = "<p>Los precios unitarios y totales incluyen IVA.</p> <h3>Gracias por tu compra!</h3><p>Te esperamos nuevamente, Que tengas un buen dia!</p>"
+    //document.write("<footer><p>Los precios unitarios y totales incluyen IVA.</p></footer>");
+    //document.write("<h2 border='2'>Gracias por tu compra!</h2><p>Te esperamos nuevamente, Que tengas un buen dia!</p>");
     console.log("Ticket:" + ticketCliente);
+    document.getElementById('div_ftra').innerHTML = ftrhtml;
   }
   else {
-    document.write("<p>Listado de Precios</p>");
+    document.getElementById('hdr').innerHTML = hdrhtml;
 
-    document.write("<table border='2'><tr><td>Producto</td><td>Precio</td></tr>");
+    maihtml = "<p>Listado de Precios</p>" + "<table border='2'><tr><td>Producto</td><td>Precio</td></tr>";
+    //document.write("<p>Listado de Precios</p>");
+
+    //document.write("<table border='2'><tr><td>Producto</td><td>Precio</td></tr>");
 
     for (let i = 0; i < arrProductos.length; i++) {
       let temp = String.prototype.toUpperCase.call(arrProductos[i]);
-      document.write("<tr><td>" + temp + "</td><td>" + arrProdprecios[i] + "</td></tr>");
+      //document.write("<tr><td>" + temp + "</td><td>" + arrProdprecios[i] + "</td></tr>");
+      maihtml = maihtml +"<tr><td>" + temp + "</td><td>" + arrProdprecios[i] + "</td></tr>";
     }
 
-    document.write("</table></main>");
+    maihtml = maihtml + "</table>";
+    //document.write("</table></main>");
 
-    document.write("<footer><p>Los precios unitarios y totales incluyen IVA.</p><p>Te esperamos nuevamente. Que tengas un buen dia!</p></footer>");
+    document.getElementById('man').innerHTML = maihtml;
+
+    ftrhtml = "<p>Los precios unitarios y totales incluyen IVA.</p><p>Te esperamos nuevamente. Que tengas un buen dia!</p>";
+    document.getElementById('div_ftra').innerHTML = ftrhtml;
+
+    //document.write("<footer><p>Los precios unitarios y totales incluyen IVA.</p><p>Te esperamos nuevamente. Que tengas un buen dia!</p></footer>");
     console.log("Catalogo de precios para:" + nombreCli + " " + apellidoCli);
   }
 
